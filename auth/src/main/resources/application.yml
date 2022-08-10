@@ -1,2 +1,15 @@
 server:
   port: 8888
+
+spring:
+  application:
+    name: custom_module
+  datasource:
+    url: jdbc:mysql://${DB_HOST:39.106.60.59}:${DB_PORT:3306}?&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+      open-in-view: true
+      hibernate:
+        ddl-auto: none
