@@ -1,4 +1,4 @@
-package com.odd.util;
+package com.odd.common.util;
 
 import okhttp3.*;
 
@@ -23,7 +23,7 @@ public class HttpUtil {
     }
 
     public static String post(String url, String params){
-        RequestBody body = RequestBody.create(params, JSON);
+        RequestBody body = RequestBody.create(JSON, params);
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
