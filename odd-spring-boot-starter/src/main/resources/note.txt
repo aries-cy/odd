@@ -1,0 +1,6 @@
+
+-------------------------------响应报文统一格式------------------------------
+1. springboot版本2.5以下
+2. 启动类添加 @EnableResponseResult 注解，所有的controller返回体包装统一
+3. 启动类不添加注解，可在controller、method添加 @ResponseResult 注解
+4. response.result.code、response.result.msg 配置成功响应码和响应信息
