@@ -1,0 +1,25 @@
+
+1.BaseController --> 通过注解的方式返回固定格式的报文
+
+	注解:	@Target -->  ElementType.Type (类、接口（包括注释类型）或枚举声明 ); ElementType.METHOD (方法声明)；ElementType.FIELD（字段声明）
+
+			@Retention --> RetentionPolicy.RUNTIME (运行时，可由JVM读入)
+
+			@Documented --> @Documented 可有可无；若没有定义，则 Annotation 不会出现在 javadoc 中
+
+    原理  a.定义一个拦截器，对请求的方法和类进行拦截，如果请求的方法和类包含注解 @ResponseResult ，则在request放入 ResponseResult.class;
+	     b.定义一个切面，实现 ResponseBodyAdvice，如果 request 中包含了 ResponseResult.class，则对响应报文进行包装；
+	       其中的beforeBodyWrite()方法可以对响应报文进行统一处理。
+
+2.对 BaseService 进行封装；（直接引入mybatis-plus）
+
+3.JSONBuilder工具类
+    a.根据路径获取json中的数据
+    b.json --> xml
+    c.json.put()  --> 链式put
+
+4.上传下载、包含MySQL存储文件，longblob
+
+5.日志管理
+
+6.CommonController --> 公共下拉框
