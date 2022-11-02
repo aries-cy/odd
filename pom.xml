@@ -19,6 +19,7 @@
         <module>common</module>
         <module>auth</module>
         <module>odd-spring-boot-starter</module>
+        <module>study</module>
     </modules>
 
     <properties>
