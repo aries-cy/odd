@@ -1,9 +1,6 @@
 package fun;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
+import java.util.function.*;
 
 /**
  * Java类库中的函数接口
@@ -22,7 +19,7 @@ public class JavaFun {
     };
 
     // 传入一个参数 T，返回 R
-    public static Function<Integer,String> function = x -> {
+    public static Function<Integer, String> function = x -> {
         System.out.println("Function自定义逻辑，参数为:" + x);
         return String.valueOf(x);
     };
@@ -31,5 +28,10 @@ public class JavaFun {
     public static UnaryOperator<Boolean> unaryOperator = x -> {
         System.out.println("UnaryOperator自定义逻辑，参数为:" + x);
         return !x;
+    };
+
+    public static BinaryOperator<Integer> binaryOperator = (x, y) -> {
+        System.out.println("BinaryOperator自定义逻辑，逻辑为:" + x + "+" + y + "=" + (x + y));
+        return x + y;
     };
 }

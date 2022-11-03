@@ -26,16 +26,31 @@ public class FunProgram {
     }
 
 
-
     public static void main(String[] args) {
         // Java函数接口调用测试
         javaFun();
 
         // Stream操作
         stream();
+
+        // reduce
+        reduce();
     }
 
-    public static void stream(){
+    public static void reduce(){
+        Integer result = Stream.of(1, 2, 3, 4)
+                // 传入参数 T 和 BinaryOperator<T> 函数接口
+                // 将 T 和Stream中的每个元素 作为参数，执行 binaryOperator 的逻辑
+                // 将结果只赋给 T ，并执行下一次循环
+                .reduce(0, (x, y) -> {
+                            System.out.println("BinaryOperator自定义逻辑，逻辑为:" + x + "+" + y + "=" + (x + y));
+                            return x + y;
+                        }
+                );
+        System.out.println(result);
+    }
+
+    public static void stream() {
         List<String> list1 = Stream.of("a", "b", "c").collect(Collectors.toList());
         List<String> list2 = Stream.of("a", "d", "e").collect(Collectors.toList());
 
@@ -48,12 +63,12 @@ public class FunProgram {
         System.out.println("----------------------");
         String min = Stream.of(list1, list2)
                 .flatMap(Collection::stream)
-                .min(Comparator.comparing(x->x.getBytes()[0]))
+                .min(Comparator.comparing(x -> x.getBytes()[0]))
                 .get();
         System.out.println("最小值：" + min);
     }
 
-    public static void javaFun(){
+    public static void javaFun() {
         // Predicate -> 传入 T , 返回boolean
         System.out.println(JavaFun.predicate.test(7));
 
@@ -65,6 +80,9 @@ public class FunProgram {
 
         // UnaryOperator —> 传入T，返回T
         System.out.println(JavaFun.unaryOperator.apply(false));
+
+        // BinaryOperator -> 传入T,T ;  返回 T
+        System.out.println(JavaFun.binaryOperator.apply(3, 4));
     }
 
 }
