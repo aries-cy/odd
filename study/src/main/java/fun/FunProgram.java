@@ -3,10 +3,7 @@ package fun;
 
 import com.odd.common.entity.User;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,9 +32,25 @@ public class FunProgram {
 
         // reduce
         reduce();
+
+        // SummaryStatistics -> 对集合中的数字进行统计
+        summaryStatistics();
     }
 
-    public static void reduce(){
+    public static void summaryStatistics() {
+        // mapToLong
+        LongSummaryStatistics summaryStatistics = users.stream().mapToLong(User::getId).summaryStatistics();
+        System.out.printf("Max: %d, Min: %d, Ave: %f, Sum: %d", summaryStatistics.getMax(), summaryStatistics.getMin(),
+                summaryStatistics.getAverage(), summaryStatistics.getSum());
+        System.out.println();
+        // flatMapToLong
+        LongSummaryStatistics statistics = Stream.of(users, users, users)
+                .flatMapToLong(list -> list.stream().mapToLong(User::getId)).summaryStatistics();
+        System.out.printf("Max: %d, Min: %d, Ave: %f, Sum: %d", statistics.getMax(), statistics.getMin(),
+                statistics.getAverage(), statistics.getSum());
+    }
+
+    public static void reduce() {
         Integer result = Stream.of(1, 2, 3, 4)
                 // 传入参数 T 和 BinaryOperator<T> 函数接口
                 // 将 T 和Stream中的每个元素 作为参数，执行 binaryOperator 的逻辑
