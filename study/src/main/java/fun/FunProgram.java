@@ -78,6 +78,9 @@ public class FunProgram {
         // Function -> 传入 T，返回 R
         System.out.println(JavaFun.function.apply(99));
 
+        // Supplier -> 不传入参数，返回 T
+        System.out.println(JavaFun.supplier.get());
+
         // UnaryOperator —> 传入T，返回T
         System.out.println(JavaFun.unaryOperator.apply(false));
 
