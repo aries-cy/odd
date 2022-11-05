@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -19,5 +20,7 @@ public class User {
     private String name;
 
     private String password;
+
+    private List<String> toys;
 
 }

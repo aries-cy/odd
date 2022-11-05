@@ -2,6 +2,7 @@ package fun;
 
 
 import com.odd.common.entity.User;
+import model.Artist;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,13 +12,16 @@ import java.util.stream.Stream;
 public class FunProgram {
 
     private static List<User> users;
+    private static List<String> j = Arrays.asList("1", "3", "5");
+    private static List<String> o = Arrays.asList("2", "4");
 
     static {
         users = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             User user = new User();
             user.setId(Long.parseLong(String.valueOf(i)));
-            user.setName("name" + i);
+            user.setName("name" + (i % 2 == 0 ? "1" : "2"));
+            user.setToys(i % 2 == 0 ? o : j);
             users.add(user);
         }
     }
@@ -38,9 +42,48 @@ public class FunProgram {
 
         // optional
         optional();
+
+        collection();
     }
 
-    public static void optional(){
+    public static void collection() {
+        // 获取id最大的user
+        Optional<User> user = users.stream().max(Comparator.comparing(User::getId));
+        System.out.println(user.get());
+
+        // 获取id的平均值
+        Double avg = users.stream().collect(Collectors.averagingLong(User::getId));
+        System.out.println(avg);
+
+        // 根据id的奇偶性，分成两个集合
+        Map<Boolean, List<User>> map = users.stream().collect(Collectors.partitioningBy(u -> u.getId() % 2 == 0));
+        System.out.println(map);
+
+        // 根据名称分组
+        Map<String, List<User>> map1 = users.stream().collect(Collectors.groupingBy(User::getName));
+        System.out.println(map1);
+
+        // 输出所有名字
+        String names = users.stream().map(User::getName).collect(Collectors.joining(",", "[", "]"));
+        System.out.println(names);
+
+        // 分组求和
+        Map<String, Long> map2 = users.stream().collect(Collectors.groupingBy(User::getName, Collectors.summingLong(User::getId)));
+        System.out.println(map2);
+
+        // 根据名字分组求，并取toy最多的元素
+        Map<String, User> map3 = users.stream().collect(
+                Collectors.groupingBy(User::getName,
+                        Collectors.collectingAndThen(
+                                Collectors.maxBy(Comparator.comparing(u -> u.getToys().size())), Optional::get)));
+        System.out.println(map3);
+
+        // 分组取值
+        Map<Long, String> map4 = users.stream().collect(Collectors.toMap(User::getId, User::getName));
+        System.out.println(map4);
+    }
+
+    public static void optional() {
         String name = "aa";
         Optional<String> optional = Optional.ofNullable(name);
         String s = optional.orElse("小明");
