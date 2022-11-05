@@ -35,6 +35,24 @@ public class FunProgram {
 
         // SummaryStatistics -> 对集合中的数字进行统计
         summaryStatistics();
+
+        // optional
+        optional();
+    }
+
+    public static void optional(){
+        String name = "aa";
+        Optional<String> optional = Optional.ofNullable(name);
+        String s = optional.orElse("小明");
+        System.out.println(s);
+        Optional<String> optional1 = optional.filter(x -> x.equals("aa"));
+        Integer ans = optional1.map(x -> {
+            if ("a".equals(x)) {
+                return 0;
+            }
+            return 1;
+        }).orElse(-1);
+        System.out.println(ans);
     }
 
     public static void summaryStatistics() {
