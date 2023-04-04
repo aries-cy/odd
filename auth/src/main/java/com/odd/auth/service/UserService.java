@@ -5,12 +5,8 @@ import com.odd.common.entity.User;
 import com.odd.common.service.BaseService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
-public class UserService extends BaseService<UserRepository> {
+public class UserService extends BaseService<UserRepository, User> {
 
-    public List<User> list(){
-        return respository.findAll();
-    }
 }
