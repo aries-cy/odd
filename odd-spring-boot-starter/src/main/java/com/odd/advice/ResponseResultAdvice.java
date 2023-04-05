@@ -37,10 +37,13 @@ public class ResponseResultAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if (o instanceof ResponseResult) {
+        if (o instanceof RestResult) {
             return o;
         } else if (o instanceof String) {
             return JSON.toJSONString(new RestResult<>(resultProperties.getCode(), resultProperties.getMsg(), o));
+        } else if (o instanceof Exception) {
+            Exception e = (Exception) o;
+            return new RestResult<>("-1", "系统异常，请联系管理员", e.getMessage());
         }
         return new RestResult<>(resultProperties.getCode(), resultProperties.getMsg(), o);
     }
