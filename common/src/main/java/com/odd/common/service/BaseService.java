@@ -3,6 +3,7 @@ package com.odd.common.service;
 import com.odd.common.repository.BaseRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,13 +19,13 @@ public class BaseService<R extends BaseRepository<T>, T> {
     JPAQueryFactory queryFactory;
 
     // 查询所有
-    public List<T> listAll(){
+    public List<T> listAll() {
         return repository.findAll();
     }
 
     // 分页查询
-    public Page<T> page(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Page<T> page(Example<T> example, Pageable pageable) {
+        return repository.findAll(example, pageable);
     }
 
     // 根据ID查询记录

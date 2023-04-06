@@ -2,10 +2,9 @@ package com.odd.common.controller;
 
 import com.odd.common.service.BaseService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +29,11 @@ public class BaseController<S extends BaseService<?, T>, T> {
 
     @GetMapping("page")
     public Page<?> page(@RequestParam(defaultValue = "1") int page,
-                        @RequestParam(defaultValue = "10") int size) {
+                        @RequestParam(defaultValue = "10") int size, @RequestBody T body) {
         PageRequest pageRequest = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "id"));
-        return service.page(pageRequest);
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        Example<T> example = Example.of(body, matcher);
+        return service.page(example, pageRequest);
     }
 
     @GetMapping("/{id}")
