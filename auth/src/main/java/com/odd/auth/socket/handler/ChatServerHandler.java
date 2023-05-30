@@ -65,14 +65,15 @@ public class ChatServerHandler implements WebSocketHandler {
 
     // 群发消息
     private void broadcastMessage(String senderId, String conversationId, String content) throws IOException {
-        //TODO 2.当客户转人工是，这里可以根据客户所选择的技能组，去选择坐席。将坐席的session加入到chatMap中
+        // TODO 4.这里也可以做排队的逻辑，每个坐席接待一个客户都可以放入一个队列，判断队列的大小，实现排队功能
+        //TODO 3.当客户转人工是，这里可以根据客户所选择的技能组，去选择坐席。将坐席的session加入到chatMap中
         Map<String, WebSocketSession> sessionMap = chatMap.get(conversationId);
         for (Map.Entry<String, WebSocketSession> entry : sessionMap.entrySet()) {
             String userId = entry.getKey();
             WebSocketSession session = entry.getValue();
             if (!senderId.equals(userId)) {
                 session.sendMessage(new TextMessage("Received message from " + senderId + ": " + content));
-                //TODO 3.这里可以将发送的消息持久化
+                //TODO 4.这里可以将发送的消息持久化
             }
         }
     }
