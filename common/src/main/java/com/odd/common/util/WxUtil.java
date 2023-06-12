@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class WxUtil {
 
-    private static String token = "youjp";
+    private static final String WX_TOKEN = "cao_yang";
 
     /**
      * 验证签名
@@ -16,13 +16,13 @@ public class WxUtil {
      * @return
      */
     public static boolean checkSignature(String signature, String timestamp, String nonce) {
-        String[] arr = new String[] { token, timestamp, nonce };
+        String[] arr = new String[] { WX_TOKEN, timestamp, nonce };
         // 将token、timestamp、nonce三个参数进行字典序排序
         // Arrays.sort(arr);
         sort(arr);
         StringBuilder content = new StringBuilder();
-        for (int i = 0; i < arr.length; i++) {
-            content.append(arr[i]);
+        for (String s : arr) {
+            content.append(s);
         }
         MessageDigest md = null;
         String tmpStr = null;
@@ -38,7 +38,7 @@ public class WxUtil {
         content = null;
         // 将sha1加密后的字符串可与signature对比，标识该请求来源于微信
 
-        return tmpStr != null ? tmpStr.equals(signature.toUpperCase()) : false;
+        return tmpStr != null && tmpStr.equals(signature.toUpperCase());
     }
 
     /**

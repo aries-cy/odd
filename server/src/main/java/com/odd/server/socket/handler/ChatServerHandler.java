@@ -1,4 +1,4 @@
-package com.odd.auth.socket.handler;
+package com.odd.server.socket.handler;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.socket.*;

@@ -1,9 +1,9 @@
 server:
-  port: 8888
+  port: 80
 
 spring:
   application:
-    name: custom_module
+    name: odd-server
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/auth?&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: ${DB_USER:root}
@@ -13,11 +13,11 @@ spring:
       open-in-view: true
       hibernate:
         ddl-auto: none
-  flyway:
-    enabled: true
-    locations: classpath:/db/migration
+#  flyway:
+#    enabled: true
+#    locations: classpath:/db/migration
 
 response:
   result:
     code: 200
-    msg: 成功
+    msg: ??

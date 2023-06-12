@@ -20,6 +20,7 @@
         <module>auth</module>
         <module>odd-spring-boot-starter</module>
         <module>study</module>
+        <module>server</module>
     </modules>
 
     <properties>

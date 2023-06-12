@@ -1,6 +1,6 @@
-package com.odd.auth.socket.config;
+package com.odd.server.socket.config;
 
-import com.odd.auth.socket.handler.ChatServerHandler;
+import com.odd.server.socket.handler.ChatServerHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
