@@ -2,6 +2,7 @@ package com.odd.config;
 
 import com.odd.advice.ControllerResultAdvice;
 import com.odd.advice.ResponseResultAdvice;
+import com.odd.aspect.ExecutionTimeAspect;
 import com.odd.model.ControllerMarker;
 import com.odd.properties.ResultProperties;
 import com.odd.service.ResponseService;
@@ -29,6 +30,11 @@ public class ResponseConfiguration  {
     @Bean
     ResponseService interceptorConfig(){
         return new ResponseService();
+    }
+
+    @Bean
+    ExecutionTimeAspect executionTimeAspect(){
+        return new ExecutionTimeAspect();
     }
 
 }
