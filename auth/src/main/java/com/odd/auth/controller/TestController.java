@@ -2,10 +2,12 @@ package com.odd.auth.controller;
 
 import com.odd.annotation.ExecuteLog;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("test")
+@RestController
+@RequestMapping("/test")
 public class TestController {
 
     @GetMapping("/executeLog")
