@@ -48,9 +48,7 @@ public class KafkaController {
     /**
      * 1. 一个分区的消息只能被同一个消费组里的一个消费者消费
      * 2. 一个分区的消息可以被不同消费组里的消费者消费
-     * 3. 可以通过acknowledgment.acknowledge()来手动提交偏移量
-     * 4. 如果消费者端不提交偏移量，kafka会认为改消息还没有被消费，重启或分区再均衡时，将消息重新分配给其他消费者，即导致消息被重复消费
-     * 5. 如果消费者
+     * 3. 如果消费者端不提交偏移量，kafka会认为改消息还没有被消费，重启或分区再均衡时，将消息重新分配给其他消费者，即导致消息被重复消费
      */
     @KafkaListener(topics = "demo", groupId = "test1")
     public void consumer1(ConsumerRecord<?, ?> record) {
