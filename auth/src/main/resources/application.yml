@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: custom_module
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/auth?&useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
     username: ${DB_USER:root}
