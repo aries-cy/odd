@@ -1,4 +1,4 @@
-package com.odd.auth;
+package com.odd.item;
 
 import com.odd.annotation.EnableResponseResult;
 import org.springframework.boot.SpringApplication;

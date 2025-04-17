@@ -1,4 +1,4 @@
-package com.odd.auth.controller;
+package com.odd.item.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
